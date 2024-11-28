@@ -1,10 +1,9 @@
 {% extends "dashboard/master.html"%}
 {% block title%} Update task {%endblock%}
 {% block content%} 
-    <form action="" method="post">
-        <input type="text" name="task" id="">
-        <button type="submit"> Send </button>
-    </form>
+<form action="" method="post" enctype="multipart/form-data">
+    {% include 'dashboard/task/_form.html' %}
+</form>
     
     
 {%endblock%}

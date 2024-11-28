@@ -2,11 +2,16 @@
 {% block title%} Index task {%endblock%}
 {% block content%} 
     <ul>
-        {% for t in tasks %}
-        <li>{{ t }}</li>
-        {#<li><a href="/task/update/{{loop.index0}}"> Edit </a></li> Dentro del loop va obteniendo el index de cada iteracion#}
-        <li><a href="{{ url_for('task.update',id=loop.index0)}}"> Edit </a></li> {#Task es el nombre definido en el BluePrint del controller#}
-        <li><a href="{{ url_for('task.delete',id=loop.index0)}}"> Delete </a></li> {#Task es el nombre definido en el BluePrint del controller#}
-        {% endfor %}
+        {%if tasks %}
+            {% for t in tasks %}
+            <li>{{ t.name }}</li>
+            {#<li><a href="/task/update/{{loop.index0}}"> Edit </a></li> Dentro del loop va obteniendo el index de cada iteracion#}
+            <li><a href="{{ url_for('tasks.update',id=t.id)}}"> Edit </a></li> {#Task es el nombre definido en el BluePrint del controller#}
+            <li><a href="{{ url_for('tasks.delete',id=t.id)}}"> Delete </a></li> {#Task es el nombre definido en el BluePrint del controller#}
+            {% endfor %}
+
+        {%else%}
+        <h3>No hay ningún registro guardado en la base de datos</h3>
+        {%endif%}
     </ul>
 {%endblock%}

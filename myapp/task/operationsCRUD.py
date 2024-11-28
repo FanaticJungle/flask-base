@@ -1,9 +1,12 @@
 from sqlalchemy.orm import Session
 from myapp.task import models
 from myapp import db
-def getById(id: int):
+def getById(id: int, show404=False):
     #task = db.session.query(models.Task).filter(models.Task.id == id).first()
-    task = db.session.query(models.Task).get(id)
+    if show404:
+        task = models.Task.query.get_or_404(id)
+    else:
+        task = db.session.query(models.Task).get(id)
     #task = models.Task.query.get_or_404(id) 
     return task
     
@@ -17,7 +20,7 @@ def create(name: str):
     db.session.refresh(taskdb)
     return taskdb
 def update(id:int, name: str):
-    taskdb = getById(id=id)
+    taskdb = getById(id=id, show404=True)
     
     taskdb.name = name
     
